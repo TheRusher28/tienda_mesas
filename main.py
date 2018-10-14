@@ -1,6 +1,14 @@
 #!/usr/bin/python3
 import random
-import datetime
+from probabilidad import coger_bola
+from probabilidad import hoy
+from probabilidad import navidad
+from probabilidad import black_friday
+from probabilidad import balls
+from probabilidad import choosen_ball
+from probabilidad import control_fecha
+
+
 """
 Este codigo se aplicaria a una tienda de muebles, en la cual sus muebles tienen un precio base de 1000€ y en base a 
 la calidad de la madera y el numero de patas que tiene se determina si es de una gama o de otra y su precio.
@@ -20,10 +28,6 @@ __credits__ = "TheRusher28"
 __mantainer__ = "TheRusher28"
 __email__ = "therusher28@gmail.com"
 __status__ = "Beginner"
-
-hoy = datetime.datetime.now()
-navidad = datetime.datetime(year=2018, month=12, day=25, hour=0, minute=0)
-black_friday = datetime.datetime(year=2018, month=11, day=23, hour=0, minute=0)
 
 class Mueble:
     def __init__(self, altura, anchura, profundidad, peso, material, color, fecha_fabr, n_patas, n_cajones):
@@ -81,6 +85,9 @@ class Mueble:
             self.precio_base += 99.9
         return self.precio_base
 
+    def retornar_precio(self):
+        precio_base = self.precio_base
+
 """
 Esto era una idea que tenia en mente pero la acabé dejando porque no sabia como añadir colchon como variable 
 de la clase y a la vez usarlo el calcular_precio_cama()
@@ -110,3 +117,5 @@ print(mesa.calcular_puntos_gama())
 print(mesa.calcular_precio())
 #cama = Cama(30, 20, 20, 10, 'madera pino', 'azul', '09/10/2018', 8, 0)
 #print(cama.calcular_precio_cama(colchon))
+print('precio =', mesa.retornar_precio())
+print(control_fecha(hoy, navidad, black_friday))
