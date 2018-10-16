@@ -5,7 +5,7 @@ from probabilidad import coger_bola
 from probabilidad import choosen_ball
 
 """
-Este codigo se aplicaria a una tienda de muebles, en la cual sus muebles tienen un precio base de 1000€ y en base a 
+Este codigo se aplicaria a una tienda de muebles, en la cual sus muebles tienen un precio base de 400€ y en base a 
 la calidad de la madera y el numero de patas que tiene se determina si es de una gama o de otra y su precio.
 0/3 == gama baja y el precio baja 101,1€ 
 3/7 == gama media y no recibe ningun cambio en su precio
@@ -34,59 +34,62 @@ class Mueble:
         self.fecha_fabr = fecha_fabr
         self.n_patas = n_patas
         self.n_cajones = n_cajones
-        self.precio_base = 300
+        self.precio_base = 400
         self.puntos = 0
 
     def calcular_puntos_gama(self):
         """Calcula los puntos, para averiguar de que gama es nuestra mesa"""
-        if self.material == 'madera_barata':
+        if self.material == 'madera barata':
             self.puntos += 1
-        if self.material == 'madera_pino':
+            print('Tienes madera barata')
+        if self.material == 'madera pino':
             self.puntos += 3
-        if self.material == 'madera_buena':
+            print('Tienes madera de pino')
+        if self.material == 'madera buena':
             self.puntos += 2
+            print('Tienes madera buena')
         if self.n_patas == 4:
             self.puntos += 1
-        if self.n_patas > 8:
+            print('Tienes 4 patas')
+        if self.n_patas >= 8:
             self.puntos += 3
-        if self.n_patas >= 4 and self.n_patas <= 7:
+            print('Tienes 8 patas o mas')
+        if self.n_patas == 6:
             self.puntos += 2
+            print('Tienes 6 patas')
         if self.n_cajones == 0:
             self.puntos += 1
-        if self.n_cajones >= 0 and self.n_cajones <= 2:
+            print('tienes 0 cajones')
+        if self.n_cajones > 0 and self.n_cajones <= 2:
             self.puntos += 2
+            print('tienes entre 0 y 2 cajones')
         if self.n_cajones > 3:
             self.puntos += 3
+            print('tienes 3 cajones o mas')
 
         #Aqui para de calcular puntos y empieza a calcular la gama.
         if self.puntos >= 0 and self.puntos <= 3:
             self.gama = 'gama baja'
-        if self.puntos >= 3 and self.puntos <= 7:
+        if self.puntos > 3 and self.puntos <= 7:
             self.gama = 'gama media'
-        if self.puntos >= 7:
+        if self.puntos > 7:
             self.gama = 'gama alta'
         return self.gama
 
     def calcular_precio(self):
         """Calcula el precio total de nuestro producto, sumandole la variacion de gama"""
-        if self.material == 'madera_barata':
+        if self.material == 'madera barata':
             self.precio_base -= 200
-            print('Tienes madera barata')
-        if self.material == 'madera_pino':
+        if self.material == 'madera pino':
             self.precio_base += 200
-            print('Tienes madera de pino')
         if self.n_patas == 4:
             self.precio_base -= 50
-            print('Tienes 4 patas')
         if self.n_patas >= 8:
             self.precio_base += 50
-            print('Tienes 8 patas o mas')
         if self.n_cajones >= 0 and self.n_cajones <= 2:
             self.precio_base += 50
-            print('tienes entre 0 y 2 cajones')
         if self.n_cajones >= 3:
             self.precio_base += 100
-            print('tienes 3 cajones o mas')
 
         if self.gama == 'gama baja':
             self.precio_base -= 101.1
@@ -123,10 +126,10 @@ class Cama(Mueble):
         return self.precio_base
 """
 #(self, altura, anchura, profundidad, peso, material, color, fecha_fabr, n_patas, n_cajones):
-mesa = Mueble(30, 20, 20, 10, 'madera pino', 'azul', '09/10/2018', 8, 12)   #Creando objeto mesa
+mesa = Mueble(30, 20, 20, 10, 'madera barata', 'azul', '09/10/2018', 8, 4)   #Creando objeto mesa
 
-print(mesa.calcular_puntos_gama())      #Llamando a calcular_puntos_gama()
-print(mesa.calcular_precio())       #Llamando a calcular_precio()
+print('Tu mesa es de gama: ', mesa.calcular_puntos_gama())      #Llamando a calcular_puntos_gama()
+print('Precio: ', mesa.calcular_precio(), '€')       #Llamando a calcular_precio()
 
 #cama = Cama(30, 20, 20, 10, 'madera pino', 'azul', '09/10/2018', 8, 0) (Ideas desechadas)
 #print(cama.calcular_precio_cama(colchon))  (Ideas desechadas)
@@ -147,5 +150,5 @@ def control_fecha(hoy, navidad, black_friday):
         print(coger_bola(choosen_ball, precio_base))
     else:
         print("Hoy no hay promocion")
-print(mesa.puntos)
 control_fecha(hoy, navidad, black_friday)
+print(__copyright__)
